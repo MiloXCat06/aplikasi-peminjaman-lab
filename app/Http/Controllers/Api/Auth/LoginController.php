@@ -44,8 +44,7 @@ class LoginController extends Controller
         //response login "success" dengan generate "Token"
         return response()->json([
             'success'       => true,
-            'user'          => auth()->guard('api')->user()->only(
-                                ['name', 'email']),
+            'user'          => auth()->guard('api')->user()->only(['name', 'email']),
             'permissions'   => auth()->guard('api')->user()->getPermissionArray(),
             'token'         => $token
             ], 200);

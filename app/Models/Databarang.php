@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Databarang extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nama_barang',
+        'merk',
+        'dataruang_id'
+    ];
+
+    public function dataruang() 
+    {
+        return $this->belongsTo(dataruang::class);
+    }
 }

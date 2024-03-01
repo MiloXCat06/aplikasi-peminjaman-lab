@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Datariwayat extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nama',
+        'kelas',
+        'nama_barang',
+        'merk',
+        'status'
+    ];
 }

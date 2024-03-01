@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(RolesTableSeeder::class);      //<-tambah ini untuk mendaftarkan RolesTableSeeder
-        $this->call(PermissionTableSeeder::class); //<-tambah ini untuk mendaftarkan PermissionTableSeeder
+        $this->call(PermissionsTableSeeder::class); //<-tambah ini untuk mendaftarkan PermissionTableSeeder
         $this->call(UserTableSeeder::class);       //<-tambah ini untuk mendaftarkan UserTableSeeder
     }
 }

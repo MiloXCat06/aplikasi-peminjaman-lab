@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_barang');
             $table->string('merk');
-            $table->foreignId('ruang_id')->constrained('books')->cascadeOnDelete();
+            $table->foreignId('dataruang_id')->constrained('dataruangs')->cascadeOnDelete();
             $table->timestamps();
         });
     }

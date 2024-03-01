@@ -8,9 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+use Spatie\Permission\Traits\HasRoles; //tambah ini, perintah pertama bu delika
+use Tymon\JWTAuth\Contracts\JWTSubject; // <-- import JWTSubject
+
+class User extends Authenticatable implements JWTSubject  //<-- tambah ini
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles; //tambah hasrole, perintah kedua bu delika
+
+    protected $guard_name = 'api'; //tambah ini, perintah ketiga bu delika
 
     /**
      * The attributes that are mass assignable.
@@ -42,4 +47,34 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //method ini dibuat untuk mendapatkan list permission
+    //berdasarkan user yang sedang login 
+    //author : aeni6746@gmail.com 
+    
+    public function getPermissionArray(){
+        return $this->getAllPermissions()->mapWithKeys(function($pr){
+            return [$pr['name'] => true];
+        });
+    }
+
+    /**
+     * getJWTIdentifier
+     * 
+     * @return void
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * getJWTCustomClaims
+     * 
+     * @return void
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
